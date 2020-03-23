@@ -1,19 +1,30 @@
 // Creates and returns a new dancer object that can step
 var makeDancer = function(top, left, timeBetweenSteps) {
 
-  var dancer = {};
 
-  // use jQuery to create an HTML <span> tag
-  dancer.$node = $('<span class="dancer"></span>');
+    // use jQuery to create an HTML <span> tag
+    this.$node = $('<span class="dancer"></span>');
+    this.top = top;
+    this.left = left;
+    this.timeBetweenSteps = timeBetweenSteps;
+    this.step();
+    this.setPosition();
 
-  dancer.step = function() {
+   }; // Ahlan how are you guys doing so far?
+
+// did u get it
+
+  makeDancer.prototype.step = function() {
     // the basic dancer doesn't do anything interesting at all on each step,
     // it just schedules the next step
-    setTimeout(dancer.step, timeBetweenSteps);
+    setTimeout(this.step.bind(this), this.timeBetweenSteps)
+    // setTimeout(this.step, this.timeBetweenSteps);
   };
-  dancer.step();
+  // Honestly, this needs to be debugged step by step and the challenge of the entire sprint is in this one function so I will leave you to figure it out for a little more
 
-  dancer.setPosition = function(top, left) {
+  // Honestly, this needs to be debugged step by step and the challenge of the entire sprint is in this one function so I will leave you to figure it out for a little more
+
+  makeDancer.prototype.setPosition = function(top, left) {
     // Use css top and left properties to position our <span> tag
     // where it belongs on the page. See http://api.jquery.com/css/
     //
@@ -21,12 +32,5 @@ var makeDancer = function(top, left, timeBetweenSteps) {
       top: top,
       left: left
     };
-    dancer.$node.css(styleSettings);
   };
 
-  // now that we have defined the dancer object, we can start setting up important parts of it by calling the methods we wrote
-  // this one sets the position to some random default point within the body
-  dancer.setPosition(top, left);
-
-  return dancer;
-};
